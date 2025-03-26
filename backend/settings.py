@@ -13,21 +13,33 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 CORS_ALLOW_ALL_ORIGINS = True
 
-# Applications (minimal setup)
+# # Applications (minimal setup)
+# INSTALLED_APPS = [
+#     # Remove these:
+#     # 'django.contrib.admin',
+#     # 'django.contrib.auth',
+#     # 'django.contrib.contenttypes',
+#     # 'django.contrib.sessions',
+#     # Keep these:
+#     "daphne",
+#     "channels",
+#     "corsheaders",
+#     "api",
+#     "django.contrib.staticfiles",
+# ]
+
 INSTALLED_APPS = [
-    # Remove these:
-    # 'django.contrib.admin',
-    # 'django.contrib.auth',
-    # 'django.contrib.contenttypes',
-    # 'django.contrib.sessions',
-    # Keep these:
     "daphne",
     "channels",
     "corsheaders",
     "api",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-
 # Disable database completely
 DATABASES = {}
 DEFAULT_AUTO_FIELD = None
