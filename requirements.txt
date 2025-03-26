@@ -11,10 +11,11 @@ channels_redis==4.2.1  # For Redis channel layer
 # MongoDB Stack (Replacing djongo)
 pymongo==4.6.2  # Modern MongoDB driver
 mongoengine==0.27.0  # Better ORM alternative to djongo
+dnspython==2.7.0
 
 # Async/HTTP Stack
 aiohttp==3.9.3
-asgiref==3.8.1
+asgiref==3.8.   
 httpx==0.27.0
 
 # Security/SSL
