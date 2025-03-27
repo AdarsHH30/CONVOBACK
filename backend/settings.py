@@ -12,6 +12,8 @@ SECRET_KEY = os.getenv("PRODUCTION_KEY", "django-insecure-fallback-key")
 # Security
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173", "https://convo-room-ai.vercel.app/"]
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 # # Applications (minimal setup)
