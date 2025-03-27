@@ -3,20 +3,18 @@ import os
 import dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-# Port configuration
 PORT = int(os.getenv("PORT", "8000"))
-# Environment
+
 dotenv.load_dotenv(BASE_DIR / ".env")
+
 SECRET_KEY = os.getenv("PRODUCTION_KEY", "django-insecure-fallback-key")
-CSRF_TRUSTED_ORIGINS = ["http://localhost:5173"]
 
 DEBUG = True
-ALLOWED_HOSTS = ["*"]
-CORS_ALLOWED_ORIGINS = ["*"]
 
+ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ["*"]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-
 
 INSTALLED_APPS = [
     "daphne",
@@ -30,11 +28,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-# Disable database completely
+
 DATABASES = {}
 DEFAULT_AUTO_FIELD = None
 
-# Disable auth and migrations
 AUTH_PASSWORD_VALIDATORS = []
 MIGRATION_MODULES = {
     "auth": None,
@@ -42,21 +39,11 @@ MIGRATION_MODULES = {
     "admin": None,
     "sessions": None,
 }
-WSGI_APPLICATION = "backend.asgi.application"
-
-# ASGI/Channels
-ASGI_APPLICATION = "backend.asgi.application"
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
-    },
-}
-
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",  # Add this BEFORE CommonMiddleware
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -64,8 +51,22 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-# URLs and templates
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
 ROOT_URLCONF = "backend.urls"
+WSGI_APPLICATION = "backend.asgi.application"
+ASGI_APPLICATION = "backend.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get("REDIS_URL", "redis://localhost:6379")],
+        },
+    },
+}
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -81,11 +82,9 @@ TEMPLATES = [
     },
 ]
 
-# Internationalization
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-# Static files
 STATIC_URL = "static/"
