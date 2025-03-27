@@ -10,6 +10,9 @@ CORS_ALLOW_ORIGINS = ["*"]
 
 DEBUG = True
 
+CSRF_TRUSTED_ORIGINS = ["*"]
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
@@ -26,6 +29,7 @@ INSTALLED_APPS = [
 ]
 
 ASGI_APPLICATION = "backend.asgi.application"
+WSGI_APPLICATION = "backend.asgi.application"
 
 CHANNEL_LAYERS = {
     "default": {
@@ -64,20 +68,6 @@ TEMPLATES = [
     },
 ]
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
-]
 
 LANGUAGE_CODE = "en-us"
 
