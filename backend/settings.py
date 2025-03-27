@@ -52,6 +52,7 @@ MIGRATION_MODULES = {
     "admin": None,
     "sessions": None,
 }
+WSGI_APPLICATION = "backend.asgi.application"
 
 # ASGI/Channels
 ASGI_APPLICATION = "backend.asgi.application"
