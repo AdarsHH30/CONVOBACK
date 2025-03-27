@@ -1,1 +1,1 @@
-./install.pakages&web: daphne -b 0.0.0.0 -p $PORT backend.asgi:application
+web: ./install_packages.sh && python manage.py runserver 0.0.0.0:8000
