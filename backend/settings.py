@@ -3,7 +3,8 @@ import os
 import dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+# Port configuration
+PORT = int(os.getenv("PORT", "8000"))
 # Environment
 dotenv.load_dotenv(BASE_DIR / ".env")
 SECRET_KEY = os.getenv("PRODUCTION_KEY", "django-insecure-fallback-key")
