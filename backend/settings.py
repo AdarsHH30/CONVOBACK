@@ -8,8 +8,8 @@ PORT = int(os.getenv("PORT", "8000"))
 # Environment
 dotenv.load_dotenv(BASE_DIR / ".env")
 SECRET_KEY = os.getenv("PRODUCTION_KEY", "django-insecure-fallback-key")
+CSRF_TRUSTED_ORIGINS = ["http://localhost:5173"]
 
-# Security
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
 CORS_ALLOWED_ORIGINS = ["*"]
@@ -17,20 +17,6 @@ CORS_ALLOWED_ORIGINS = ["*"]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
-# # Applications (minimal setup)
-# INSTALLED_APPS = [
-#     # Remove these:
-#     # 'django.contrib.admin',
-#     # 'django.contrib.auth',
-#     # 'django.contrib.contenttypes',
-#     # 'django.contrib.sessions',
-#     # Keep these:
-#     "daphne",
-#     "channels",
-#     "corsheaders",
-#     "api",
-#     "django.contrib.staticfiles",
-# ]
 
 INSTALLED_APPS = [
     "daphne",
