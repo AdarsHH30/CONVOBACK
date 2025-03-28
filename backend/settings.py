@@ -8,11 +8,11 @@ PORT = int(os.getenv("PORT", "8000"))
 # Environment
 dotenv.load_dotenv(BASE_DIR / ".env")
 SECRET_KEY = os.getenv("PRODUCTION_KEY", "django-insecure-fallback-key")
-CSRF_TRUSTED_ORIGINS = ["https://localhost:5173"]
+CSRF_TRUSTED_ORIGINS = ["https://localhost:5173", "https://convo-room-ai.vercel.app/"]
 
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173", "https://convo-room-ai.vercel.app/"]
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
