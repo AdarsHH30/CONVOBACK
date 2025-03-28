@@ -3,16 +3,17 @@ import os
 import dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-# Port configuration
-PORT = int(os.getenv("PORT", "8000"))
 # Environment
 dotenv.load_dotenv(BASE_DIR / ".env")
+# Port configuration
+PORT = int(os.getenv("PORT", "8000"))
 SECRET_KEY = os.getenv("PRODUCTION_KEY", "django-insecure-fallback-key")
-CSRF_TRUSTED_ORIGINS = ["https://localhost:5173", "https://convo-room-ai.vercel.app/"]
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173").rstrip("/")
+CSRF_TRUSTED_ORIGINS = [FRONTEND_URL]
 
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173", "https://convo-room-ai.vercel.app/"]
+CORS_ALLOWED_ORIGINS = [FRONTEND_URL]
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
