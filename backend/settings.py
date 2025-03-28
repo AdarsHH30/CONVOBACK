@@ -1,19 +1,22 @@
 from pathlib import Path
 import os
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
 import dotenv
 
-SECRET_KEY = dotenv.get_key(BASE_DIR / ".env", "PRODUCTION_KEY")
-CORS_ALLOW_ORIGINS = ["*"]
+BASE_DIR = Path(__file__).resolve().parent.parent
+# Port configuration
+PORT = int(os.getenv("PORT", "8000"))
+# Environment
+dotenv.load_dotenv(BASE_DIR / ".env")
+SECRET_KEY = os.getenv("PRODUCTION_KEY", "django-insecure-fallback-key")
+CSRF_TRUSTED_ORIGINS = ["https://localhost:5173"]
 
 DEBUG = True
+ALLOWED_HOSTS = ["*"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
 
-CSRF_TRUSTED_ORIGINS = ["*"]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-ALLOWED_HOSTS = ["*"]
+
 
 INSTALLED_APPS = [
     "daphne",
@@ -27,20 +30,33 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+# Disable database completely
+DATABASES = {}
+DEFAULT_AUTO_FIELD = None
 
-ASGI_APPLICATION = "backend.asgi.application"
+# Disable auth and migrations
+AUTH_PASSWORD_VALIDATORS = []
+MIGRATION_MODULES = {
+    "auth": None,
+    "contenttypes": None,
+    "admin": None,
+    "sessions": None,
+}
 WSGI_APPLICATION = "backend.asgi.application"
 
+# ASGI/Channels
+ASGI_APPLICATION = "backend.asgi.application"
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels.layers.InMemoryChannelLayer",
     },
 }
 
+
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",  # Add this BEFORE CommonMiddleware
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -48,10 +64,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
-
+# URLs and templates
 ROOT_URLCONF = "backend.urls"
-
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -59,7 +73,6 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
-                "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
@@ -68,15 +81,11 @@ TEMPLATES = [
     },
 ]
 
-
+# Internationalization
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
 USE_I18N = True
-
 USE_TZ = True
 
+# Static files
 STATIC_URL = "static/"
-
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
