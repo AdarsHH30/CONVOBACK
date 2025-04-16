@@ -29,7 +29,7 @@ if MONGO_URI is None:
 client = MongoClient(MONGO_URI)
 db = client["convoroom"]
 messages_collection = db["messages"]
-print("Rooms Collection:", messages_collection)
+# print("Rooms Collection:", messages_collection)
 
 
 @api_view(["POST"])
@@ -49,7 +49,12 @@ def getReactData(request):
             )
 
             room_conversations[room_id].predict(
-                input=os.getenv("Prompt", "You are a helpful assistant.")
+                input=(
+                    os.getenv(
+                        "Prompt",
+                        "Welcome to the chat room! How can I assist you today?",
+                    )
+                )
             )
 
         room_chat_history = list(
