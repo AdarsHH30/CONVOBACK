@@ -27,7 +27,7 @@ db = client["convoroom"]
 messages_collection = db["messages"]
 
 ai_response = conversation.predict(
-    input="for every converstaion from now give me a more short and correct answer"
+    input=os.getenv("Prompt", "You are a helpful assistant.")
 )
 print(ai_response)
 
