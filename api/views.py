@@ -38,6 +38,7 @@ def getReactData(request):
         data = json.loads(request.body.decode("utf-8"))
         user_message = data.get("message", "").strip()
         room_id = data.get("roomId", "").strip()
+        username = data.get("username", "User")  # Make sure username is extracted
 
         if not user_message or not room_id:
             return Response({"error": "Invalid request"}, status=400)
@@ -74,7 +75,7 @@ def getReactData(request):
         collection.insert_one(
             {
                 "room_id": room_id,
-                "sender": "User",
+                "sender": username,
                 "message": user_message,
                 "timestamp": datetime.utcnow().isoformat(),
             }
