@@ -12,4 +12,3 @@ application = ProtocolTypeRouter(
         "websocket": AuthMiddlewareStack(URLRouter(api.routing.websocket_urlpatterns)),
     }
 )
-# This file is the entry point for ASGI-compatible web servers to serve your project. It should be referenced from your ASGI server, and should not be run directly. It is the equivalent of a WSGI file for ASGI.
