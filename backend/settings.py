@@ -9,15 +9,14 @@ dotenv.load_dotenv(BASE_DIR / ".env")
 PORT = int(os.getenv("PORT", "8000"))
 SECRET_KEY = os.getenv("PRODUCTION_KEY", "django-insecure-fallback-key")
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173").rstrip("/")
-CSRF_TRUSTED_ORIGINS = [FRONTEND_URL]
 
-DEBUG = True
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*"]  # or restrict to specific domains
+
 CORS_ALLOWED_ORIGINS = [FRONTEND_URL]
-
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
 
+CSRF_TRUSTED_ORIGINS = [FRONTEND_URL]
 
 INSTALLED_APPS = [
     "daphne",
