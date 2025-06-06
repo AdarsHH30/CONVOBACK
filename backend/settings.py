@@ -10,10 +10,10 @@ PORT = int(os.getenv("PORT", "8000"))
 SECRET_KEY = os.getenv("PRODUCTION_KEY", "django-insecure-fallback-key")
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173").rstrip("/")
 
-ALLOWED_HOSTS = ["*"]  # or restrict to specific domains
+ALLOWED_HOSTS = ["*"]  # Allow all hosts for development;
 
 CORS_ALLOWED_ORIGINS = [FRONTEND_URL]
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = [FRONTEND_URL]
