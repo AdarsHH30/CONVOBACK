@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import dotenv
+from asgiref.sync import async_to_sync
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Environment
@@ -46,11 +47,26 @@ WSGI_APPLICATION = "backend.asgi.application"
 
 # ASGI/Channels
 ASGI_APPLICATION = "backend.asgi.application"
+REDIS_URL = os.environ.get("redis_host", "redis://localhost:6379/0")
+
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [REDIS_URL],
+        },
     },
 }
+
+# Test Redis connection
+import channels.layers
+
+try:
+    channel_layer = channels.layers.get_channel_layer()
+    async_to_sync(channel_layer.send)("test_channel", {"type": "test.message"})
+    print("Redis connection successful")
+except Exception as e:
+    print(f"Redis connection failed: {e}")
 
 
 MIDDLEWARE = [
