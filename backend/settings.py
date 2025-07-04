@@ -58,15 +58,15 @@ CHANNEL_LAYERS = {
     },
 }
 
-# Test Redis connection
-import channels.layers
+# # Test Redis connection
+# import channels.layers
 
-try:
-    channel_layer = channels.layers.get_channel_layer()
-    async_to_sync(channel_layer.send)("test_channel", {"type": "test.message"})
-    print("Redis connection successful")
-except Exception as e:
-    print(f"Redis connection failed: {e}")
+# try:
+#     channel_layer = channels.layers.get_channel_layer()
+#     async_to_sync(channel_layer.send)("test_channel", {"type": "test.message"})
+#     print("Redis connection successful")
+# except Exception as e:
+#     print(f"Redis connection failed: {e}")
 
 
 MIDDLEWARE = [
