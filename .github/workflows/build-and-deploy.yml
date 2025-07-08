@@ -1,4 +1,4 @@
-name: Convoroom Backend
+name: Azure convoroom-backend CI/CD
 
 on:
   push:
