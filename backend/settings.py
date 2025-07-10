@@ -11,7 +11,10 @@ PORT = int(os.getenv("PORT", "8000"))
 SECRET_KEY = os.getenv("PRODUCTION_KEY", "django-insecure-fallback-key")
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173").rstrip("/")
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost").split(",")
+
+# ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
+# ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS if host.strip()]
+ALLOWED_HOSTS = "127.0.0.1:8000,127.0.0.1,localhost,convoback-1.onrender.com".split(",")
 
 
 CORS_ALLOWED_ORIGINS = [FRONTEND_URL]
@@ -109,4 +112,15 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = "static/"
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False")
+
+# ---
+# Additional production security recommendations:
+# - Set SECURE_SSL_REDIRECT = True
+# - Set SESSION_COOKIE_SECURE = True
+# - Set CSRF_COOKIE_SECURE = True
+# - Set X_FRAME_OPTIONS = 'DENY' or 'SAMEORIGIN'
+# - Set SECURE_HSTS_SECONDS = 31536000
+# - Set SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# - Set SECURE_HSTS_PRELOAD = True
+# Uncomment and configure the above as needed for your deployment.
